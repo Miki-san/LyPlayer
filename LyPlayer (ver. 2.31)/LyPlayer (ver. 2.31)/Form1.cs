@@ -137,23 +137,7 @@ namespace LyPlayer__ver._2._31_
             {
                 MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
             }
-
         }
-
-//        private void AxWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
-//        {
-//            if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
-//            {
-//                try
-//                {
-//                   // Playlist_move(1); //Makes move down (right) in playlist;
-//                }
-//                catch (Exception ex)
-//                {
-//                    MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window;
-//                }
-//            }
-//        }
 
         private void Stop_button_Click(object sender, EventArgs e) //Stops file playing; Остановка проигрывания файла. Ставит значение курсор времени в начало трека;
         {

@@ -222,7 +222,6 @@
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(132, 175);
             this.axWindowsMediaPlayer1.TabIndex = 13;
             this.axWindowsMediaPlayer1.Visible = false;
-            this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.AxWindowsMediaPlayer1_PlayStateChange);
             // 
             // LyPlayer_main
             // 
