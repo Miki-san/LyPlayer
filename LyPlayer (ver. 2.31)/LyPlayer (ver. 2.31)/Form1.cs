@@ -14,11 +14,12 @@ namespace LyPlayer__ver._2._31_
         private string[] files, paths; //Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
         private int STI; //Selected track index; Индекс выбранного трека;
         private int playlist; //Length of playlist; Колличество треков в плэйлисте;
+        private int durationOfTrack; //Duration time of track; Длинна трека;
+        private int currentTime; //Current time of track; Пройденное время;
 
         private void LyPlayer_main_Load(object sender, EventArgs e)
         {
             STI = 0; //Default value of STI; Начальное значение индекса выбранного трека;
-           
         }      
 
         public void FileOpen() //Opens file; Открытие файла;
@@ -69,6 +70,7 @@ namespace LyPlayer__ver._2._31_
         {
             axWindowsMediaPlayer1.URL = paths[STI]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
             NPBox.Text = files[STI]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
+            axWindowsMediaPlayer1.settings.volume = 100; //Set volume to 100% value; Устанавливаем громкость на 100%;
             axWindowsMediaPlayer1.Ctlcontrols.play(); //Says to player play the file; Запускает плеер;
         }
 
@@ -137,6 +139,28 @@ namespace LyPlayer__ver._2._31_
             {
                 MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
             }
+        }
+
+        private void Volume_Bar_Scroll(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Bind volume value to scroll bar; Привязываем значение громкости к ползунку;
+        }
+
+        private void AxWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) //Call when state of playing changes;
+        {
+            if (e.newState == 3) //If Playing; Если идет проигрывание;
+            {
+                double dur = axWindowsMediaPlayer1.currentMedia.duration; //Duration time of track; Длина трека;
+                durationOfTrack = (int)dur; 
+                Music_bar.Maximum = durationOfTrack; //Set maximum value for Music bar; Устанавливаем максимальное значение для Music bar;
+            }
+        }
+
+        private void Time_track_timer_Tick(object sender, EventArgs e) //Timer for current time value; Таймер для значения пройденного времени;
+        {
+            currentTime = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            Music_bar.Value = currentTime;
+            Time_box.Text = (currentTime / 60).ToString() + ":" + (currentTime % 60).ToString() + " / " + (durationOfTrack / 60).ToString() + ":" + (durationOfTrack % 60).ToString(); //Writes time of track; Выводит время трека;
         }
 
         private void Stop_button_Click(object sender, EventArgs e) //Stops file playing; Остановка проигрывания файла. Ставит значение курсор времени в начало трека;

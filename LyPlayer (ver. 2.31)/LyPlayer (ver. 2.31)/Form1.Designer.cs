@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LyPlayer_main));
             this.Menu = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +48,13 @@
             this.Pause_button = new System.Windows.Forms.Button();
             this.Play_button = new System.Windows.Forms.Button();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.Volume_Bar = new System.Windows.Forms.TrackBar();
+            this.Time_track_timer = new System.Windows.Forms.Timer(this.components);
+            this.Volume = new System.Windows.Forms.Label();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Album_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Volume_Bar)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -155,7 +160,7 @@
             // NowPlaying_label
             // 
             this.NowPlaying_label.AutoSize = true;
-            this.NowPlaying_label.Location = new System.Drawing.Point(12, 262);
+            this.NowPlaying_label.Location = new System.Drawing.Point(9, 234);
             this.NowPlaying_label.Name = "NowPlaying_label";
             this.NowPlaying_label.Size = new System.Drawing.Size(69, 13);
             this.NowPlaying_label.TabIndex = 11;
@@ -163,7 +168,7 @@
             // 
             // NPBox
             // 
-            this.NPBox.Location = new System.Drawing.Point(87, 259);
+            this.NPBox.Location = new System.Drawing.Point(84, 231);
             this.NPBox.Name = "NPBox";
             this.NPBox.ReadOnly = true;
             this.NPBox.Size = new System.Drawing.Size(250, 20);
@@ -219,14 +224,47 @@
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(210, 65);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(132, 175);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(132, 25);
             this.axWindowsMediaPlayer1.TabIndex = 13;
             this.axWindowsMediaPlayer1.Visible = false;
+            this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.AxWindowsMediaPlayer1_PlayStateChange);
+            // 
+            // Volume_Bar
+            // 
+            this.Volume_Bar.LargeChange = 10;
+            this.Volume_Bar.Location = new System.Drawing.Point(202, 304);
+            this.Volume_Bar.Maximum = 100;
+            this.Volume_Bar.Name = "Volume_Bar";
+            this.Volume_Bar.RightToLeftLayout = true;
+            this.Volume_Bar.Size = new System.Drawing.Size(135, 45);
+            this.Volume_Bar.SmallChange = 10;
+            this.Volume_Bar.TabIndex = 14;
+            this.Volume_Bar.TickFrequency = 10;
+            this.Volume_Bar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Volume_Bar.Value = 100;
+            this.Volume_Bar.Scroll += new System.EventHandler(this.Volume_Bar_Scroll);
+            // 
+            // Time_track_timer
+            // 
+            this.Time_track_timer.Enabled = true;
+            this.Time_track_timer.Interval = 1000;
+            this.Time_track_timer.Tick += new System.EventHandler(this.Time_track_timer_Tick);
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSize = true;
+            this.Volume.Location = new System.Drawing.Point(207, 288);
+            this.Volume.Name = "Volume";
+            this.Volume.Size = new System.Drawing.Size(45, 13);
+            this.Volume.TabIndex = 15;
+            this.Volume.Text = "Volume:";
             // 
             // LyPlayer_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 407);
+            this.Controls.Add(this.Volume);
+            this.Controls.Add(this.Volume_Bar);
             this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.NPBox);
             this.Controls.Add(this.NowPlaying_label);
@@ -253,6 +291,7 @@
             this.Menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Album_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Volume_Bar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,6 +317,9 @@
         private System.Windows.Forms.Label NowPlaying_label;
         private System.Windows.Forms.TextBox NPBox;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.TrackBar Volume_Bar;
+        private System.Windows.Forms.Timer Time_track_timer;
+        private System.Windows.Forms.Label Volume;
     }
 }
 
