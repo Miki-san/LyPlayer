@@ -12,15 +12,10 @@ namespace LyPlayer__ver._2._31_
         }
 
         private string[] files, paths; //Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
-        private int STI; //Selected track index; Индекс выбранного трека;
         private int playlist; //Length of playlist; Колличество треков в плэйлисте;
         private int durationOfTrack; //Duration time of track; Длинна трека;
-        private int currentTime; //Current time of track; Пройденное время;
-
-        private void LyPlayer_main_Load(object sender, EventArgs e)
-        {
-            STI = 0; //Default value of STI; Начальное значение индекса выбранного трека;
-        }      
+        private int currentTime; //Current time of track; Пройденное время;  
+        private int p;
 
         public void FileOpen() //Opens file; Открытие файла;
         {
@@ -68,9 +63,9 @@ namespace LyPlayer__ver._2._31_
 
         public void PlayIndexFile() //Plays file by its index in 'paths'; Играет трек по его индексу в массиве 'paths';
         {
-            axWindowsMediaPlayer1.URL = paths[STI]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
-            NPBox.Text = files[STI]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
-            axWindowsMediaPlayer1.settings.volume = 100; //Set volume to 100% value; Устанавливаем громкость на 100%;
+            axWindowsMediaPlayer1.URL = paths[Playlist_box.SelectedIndex]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
+            NPBox.Text = files[Playlist_box.SelectedIndex]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
+            axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Set volume to 100% value; Устанавливаем громкость на 100%;
             axWindowsMediaPlayer1.Ctlcontrols.play(); //Says to player play the file; Запускает плеер;
         }
 
@@ -89,8 +84,8 @@ namespace LyPlayer__ver._2._31_
 
         public void Playlist_move(int shift) //Moves on playlist; Движение по плэйлисту;
         {
-            STI = (STI + shift + playlist) % playlist; // Makes new value of STI; Задает новое значение индекса выделенного трека;
-            Playlist_box.SetSelected(STI, true); //Set selected file by new index; Ставит выделение на трек по его индексу в плэйлисте;
+            Playlist_box.SetSelected((Playlist_box.SelectedIndex + shift) % playlist, true);
+            axWindowsMediaPlayer1.Ctlcontrols.play();
         }
 
         private void Next_button_Click(object sender, EventArgs e) //Plays next file; Проигрывание следущего файла;
@@ -153,6 +148,10 @@ namespace LyPlayer__ver._2._31_
                 double dur = axWindowsMediaPlayer1.currentMedia.duration; //Duration time of track; Длина трека;
                 durationOfTrack = (int)dur; 
                 Music_bar.Maximum = durationOfTrack; //Set maximum value for Music bar; Устанавливаем максимальное значение для Music bar;
+            }
+            else if (e.newState == 1)
+            {
+                Playlist_move(1);
             }
         }
 

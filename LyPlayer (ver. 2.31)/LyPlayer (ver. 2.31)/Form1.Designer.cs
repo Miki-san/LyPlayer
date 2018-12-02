@@ -99,6 +99,7 @@
             // 
             // Music_bar
             // 
+            this.Music_bar.Enabled = false;
             this.Music_bar.Location = new System.Drawing.Point(12, 355);
             this.Music_bar.Name = "Music_bar";
             this.Music_bar.Size = new System.Drawing.Size(556, 10);
@@ -109,6 +110,7 @@
             // 
             this.Time_box.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Time_box.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Time_box.Enabled = false;
             this.Time_box.Location = new System.Drawing.Point(12, 375);
             this.Time_box.Name = "Time_box";
             this.Time_box.ReadOnly = true;
@@ -150,6 +152,7 @@
             // 
             // Playlist_box
             // 
+            this.Playlist_box.Enabled = false;
             this.Playlist_box.FormattingEnabled = true;
             this.Playlist_box.Location = new System.Drawing.Point(348, 27);
             this.Playlist_box.Name = "Playlist_box";
@@ -168,6 +171,7 @@
             // 
             // NPBox
             // 
+            this.NPBox.Enabled = false;
             this.NPBox.Location = new System.Drawing.Point(84, 231);
             this.NPBox.Name = "NPBox";
             this.NPBox.ReadOnly = true;
@@ -187,6 +191,7 @@
             // 
             // Album_picture
             // 
+            this.Album_picture.Enabled = false;
             this.Album_picture.Image = global::LyPlayer__ver._2._31_.Properties.Resources._1;
             this.Album_picture.Location = new System.Drawing.Point(12, 27);
             this.Album_picture.Name = "Album_picture";
@@ -286,7 +291,6 @@
             this.Name = "LyPlayer_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LyPlayer";
-            this.Load += new System.EventHandler(this.LyPlayer_main_Load);
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Album_picture)).EndInit();
