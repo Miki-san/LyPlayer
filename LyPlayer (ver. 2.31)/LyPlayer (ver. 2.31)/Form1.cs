@@ -13,9 +13,8 @@ namespace LyPlayer__ver._2._31_
 
         private string[] files, paths; //Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
         private int playlist; //Length of playlist; Колличество треков в плэйлисте;
-        private int durationOfTrack; //Duration time of track; Длинна трека;
-        private int currentTime; //Current time of track; Пройденное время;  
-        private int p;
+        private int durationOfTrack; //Duration time of track; Длина трека;
+        private int currentTime; //Current time of track; Пройденное время трека;
 
         public void FileOpen() //Opens file; Открытие файла;
         {
@@ -41,7 +40,7 @@ namespace LyPlayer__ver._2._31_
                     }
                 }
 
-                Playlist_box.SetSelected(0, true); //Set selected first element in 'Playlist_box'; Устанавливаем выделение на первый трек плэйлиста;
+                Playlist_box.SetSelected(0, true); //Set selected first element in 'Playlist_box'; Устанавливаем курсор на первый трек плэйлиста;
 
             }
             catch (NullReferenceException)
@@ -151,7 +150,14 @@ namespace LyPlayer__ver._2._31_
             }
             else if (e.newState == 1)
             {
-                Playlist_move(1);
+                try
+                {
+                    Playlist_move(1); //Makes move down (right) in playlist; Делаем движение вниз (вправо) по плэйлисту;
+                }
+                catch (DivideByZeroException)
+                {
+                    MessageBox.Show($"Add track to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
+                }
             }
         }
 
