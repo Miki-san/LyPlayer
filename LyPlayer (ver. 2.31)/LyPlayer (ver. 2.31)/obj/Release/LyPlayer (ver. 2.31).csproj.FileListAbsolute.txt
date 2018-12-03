@@ -12,4 +12,4 @@ C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyP
 C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csproj.CoreCompileInputs.cache
 C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).exe
 C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).pdb
-C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csprojResolveAssemblyReference.cache
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csprojAssemblyReference.cache

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections;
+using AxWMPLib;
 
 namespace LyPlayer__ver._2._31_
 {
@@ -12,14 +13,11 @@ namespace LyPlayer__ver._2._31_
             InitializeComponent();
         }
 
-        private object[] filesArr, pathsArr ; //Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
+        private ArrayList Files = new ArrayList();
+        private ArrayList Paths = new ArrayList();//Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
         private int playlist; //Length of playlist; Колличество треков в плэйлисте;
         private int durationOfTrack; //Duration time of track; Длина трека;
         private int currentTime; //Current time of track; Пройденное время трека;
-
-        Queue Files = new Queue();
-        Queue Paths = new Queue();
-
 
         public void FileOpen() //Opens file; Открытие файла;
         {
@@ -34,14 +32,11 @@ namespace LyPlayer__ver._2._31_
 
                 if (openFile.ShowDialog() == DialogResult.OK) //If system can open the dialog window...; Если система смогла открыть диалоговое окно...;
                 {
-                    Files.Enqueue(openFile.SafeFileNames); //Save names of selected files into 'files' array of string; Сохраняет имена выбранных файлов в массив строк 'files';
-                    Paths.Enqueue(openFile.FileNames); //Save ways of selected files into 'paths' array of string; Сохраняет пути выбранных файлов в массив строк 'paths';
-
-                    filesArr = Files.ToArray();
-                    pathsArr = Paths.ToArray();
+                    Files.Add(openFile.SafeFileNames.ToString()); //Save names of selected files into 'files' array of string; Сохраняет имена выбранных файлов в массив строк 'files';
+                    Paths.Add(openFile.FileNames.ToString()); //Save ways of selected files into 'paths' array of string; Сохраняет пути выбранных файлов в массив строк 'paths';
 
                     Playlist_box.Items.Clear(); //Clears Playlist_box before loading new playlist; Очищает Playlist_box прежде чем загрузить новый плэйлист;
-                    playlist = filesArr.Length; //'playlist' is a value of 'files' length; Задаем значение переменной 'playlist';
+                    playlist = Files.Count; //'playlist' is a value of 'files' length; Задаем значение переменной 'playlist';
 
                     foreach (Object file in Files)
                     {
@@ -71,10 +66,10 @@ namespace LyPlayer__ver._2._31_
 
         public void PlayIndexFile() //Plays file by its index in 'paths'; Играет трек по его индексу в массиве 'paths';
         {
-            axWindowsMediaPlayer1.URL = filesArr[Playlist_box.SelectedIndex].ToString(); //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
-            NPBox.Text = filesArr[Playlist_box.SelectedIndex].ToString(); //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
-            axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Set volume to 100% value; Устанавливаем громкость на 100%;
-            axWindowsMediaPlayer1.Ctlcontrols.play(); //Says to player play the file; Запускает плеер;
+            //axWindowsMediaPlayer1.URL = Files[Playlist_box.SelectedIndex]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
+            //NPBox.Text = Files[Playlist_box.SelectedIndex]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
+            //axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Set volume to 100% value; Устанавливаем громкость на 100%;
+            //axWindowsMediaPlayer1.Ctlcontrols.play(); //Says to player play the file; Запускает плеер;
         }
 
         private void Playlist_box_SelectedIndexChanged(object sender, EventArgs e) //Plays file if selected file index changed; Проигрывает файл если был изменен индекс выделенного файла;
