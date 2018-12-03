@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections;
+using System.Collections.Generic;
+using AxWMPLib;
 
 namespace LyPlayer__ver._2._31_
 {
@@ -11,43 +14,48 @@ namespace LyPlayer__ver._2._31_
             InitializeComponent();
         }
 
-        private string[] files, paths; //Arrays of Names and Ways of these files in playlist; Массивы Имен и Путей файлов в плэйлисте;
+        List<string> Files = new List<string>(); //List of files; Список файлов;
+        List<string> Paths = new List<string>(); //List of file ways; Список путей файлов;
         private int playlist; //Length of playlist; Колличество треков в плэйлисте;
         private int durationOfTrack; //Duration time of track; Длина трека;
         private int currentTime; //Current time of track; Пройденное время трека;
+        private int playingTrackIndex;
+        private bool FirstAdd = true; //Is true if tracks add at first time; Является правдой, если трек плэйлист загружается впервые;
 
         public void FileOpen() //Opens file; Открытие файла;
         {
             try
             {
-                OpenFileDialog openFile = new OpenFileDialog() //Initialize new object 'openFile' of OpenFileDialog class; Инициализирует новый объект 'openFile' класса OpenFileDialog;
+                OpenFileDialog openFile = new OpenFileDialog()
                 {
                     Filter = "MP3 Files|* .mp3| WAV|* .wav", //Filters for audiofiles; Фильтры аудиофайлов;
                     Multiselect = true, //User can multiselect files; Пользователь может выбрать несколько файлов за один раз;
                     ValidateNames = true //All names of files must be validate; Все имена файлов должны быть допустимыми;
                 };
 
-                if (openFile.ShowDialog() == DialogResult.OK) //If system can open the dialog window...; Если система смогла открыть диалоговое окно...;
+                if (openFile.ShowDialog() == DialogResult.OK)
                 {
-                    files = openFile.SafeFileNames; //Save names of selected files into 'files' array of string; Сохраняет имена выбранных файлов в массив строк 'files';
-                    paths = openFile.FileNames; //Save ways of selected files into 'paths' array of string; Сохраняет пути выбранных файлов в массив строк 'paths';
+                    Files.AddRange(openFile.SafeFileNames); //Save names of selected files into 'Files' list of string; Сохраняет имена выбранных файлов в список строк 'Files';
+                    Paths.AddRange(openFile.FileNames); //Save ways of selected files into 'Paths' list of string; Сохраняет пути выбранных файлов в список строк 'Paths';
                     Playlist_box.Items.Clear(); //Clears Playlist_box before loading new playlist; Очищает Playlist_box прежде чем загрузить новый плэйлист;
-                    playlist = files.Length; //'playlist' is a value of 'files' length; Задаем значение переменной 'playlist';
+                    playlist = Files.Count; //'playlist' is a value of 'Files' length; Задаем значение переменной 'playlist';
 
-                    for (int i = 0; i < playlist; i++)
+                    foreach (string file in Files)
                     {
-                        Playlist_box.Items.Add(files[i]); //Adds names of files into 'Playlist_box' from 'files'; Добавляем имена файлов в 'Playlist_box' из массива 'files';
-                    }
+                        Playlist_box.Items.Add(file); //Load list of names into Playlist_box; Загружает список имен в Playlist_box;
+                    } 
                 }
 
-                Playlist_box.SetSelected(0, true); //Set selected first element in 'Playlist_box'; Устанавливаем курсор на первый трек плэйлиста;
-
+                if (FirstAdd)
+                {
+                    Playlist_box.SetSelected(0, true); //Set selected first element in 'Playlist_box'; Устанавливаем курсор на первый трек плэйлиста;
+                    FirstAdd = false;
+                } 
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
                 MessageBox.Show($"Choose file to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в новом окне;
             }
-
         }
 
         private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e) //Opens file dialog window if you click tool strip menu; Открывает диалоговое окно если вы открываете верхнее меню;
@@ -62,17 +70,21 @@ namespace LyPlayer__ver._2._31_
 
         public void PlayIndexFile() //Plays file by its index in 'paths'; Играет трек по его индексу в массиве 'paths';
         {
-            axWindowsMediaPlayer1.URL = paths[Playlist_box.SelectedIndex]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
-            NPBox.Text = files[Playlist_box.SelectedIndex]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
+            playingTrackIndex = Playlist_box.SelectedIndex; 
+            NPBox.Text = Files[playingTrackIndex]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
             axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Set volume to 100% value; Устанавливаем громкость на 100%;
-            axWindowsMediaPlayer1.Ctlcontrols.play(); //Says to player play the file; Запускает плеер;
+            axWindowsMediaPlayer1.URL = Paths[playingTrackIndex]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
         }
 
         private void Playlist_box_SelectedIndexChanged(object sender, EventArgs e) //Plays file if selected file index changed; Проигрывает файл если был изменен индекс выделенного файла;
         {
             try
             {
-                PlayIndexFile();
+                if ((Playlist_box.SelectedIndex != playingTrackIndex) | (FirstAdd == true))
+                {
+                    PlayIndexFile();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -83,8 +95,7 @@ namespace LyPlayer__ver._2._31_
 
         public void Playlist_move(int shift) //Moves on playlist; Движение по плэйлисту;
         {
-            Playlist_box.SetSelected((Playlist_box.SelectedIndex + shift) % playlist, true);
-            axWindowsMediaPlayer1.Ctlcontrols.play();
+            Playlist_box.SetSelected((playingTrackIndex + shift) % playlist, true);
         }
 
         private void Next_button_Click(object sender, EventArgs e) //Plays next file; Проигрывание следущего файла;
@@ -148,7 +159,7 @@ namespace LyPlayer__ver._2._31_
                 durationOfTrack = (int)dur; 
                 Music_bar.Maximum = durationOfTrack; //Set maximum value for Music bar; Устанавливаем максимальное значение для Music bar;
             }
-            else if (e.newState == 1)
+            else if (e.newState == 8) //If MediaEnded; Если медиа файл кончился;
             {
                 try
                 {
@@ -159,14 +170,25 @@ namespace LyPlayer__ver._2._31_
                     MessageBox.Show($"Add track to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
                 }
             }
+            else if (e.newState == 10) //If Waiting; Если ожидает;
+            {
+                try
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                }
+                catch (DivideByZeroException)
+                {
+                    MessageBox.Show($"Add track to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
+                }
+            }
         }
 
-        private void Time_track_timer_Tick(object sender, EventArgs e) //Timer for current time value; Таймер для значения пройденного времени;
-        {
-            currentTime = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-            Music_bar.Value = currentTime;
-            Time_box.Text = (currentTime / 60).ToString() + ":" + (currentTime % 60).ToString() + " / " + (durationOfTrack / 60).ToString() + ":" + (durationOfTrack % 60).ToString(); //Writes time of track; Выводит время трека;
-        }
+       private void Time_track_timer_Tick(object sender, EventArgs e) //Timer for current time value; Таймер для значения пройденного времени;
+       {
+           currentTime = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+           Music_bar.Value = currentTime;
+           Time_box.Text = (currentTime / 60).ToString() + ":" + (currentTime % 60).ToString() + " / " + (durationOfTrack / 60).ToString() + ":" + (durationOfTrack % 60).ToString(); //Writes time of track; Выводит время трека;
+       }
 
         private void Stop_button_Click(object sender, EventArgs e) //Stops file playing; Остановка проигрывания файла. Ставит значение курсор времени в начало трека;
         {
@@ -181,4 +203,3 @@ namespace LyPlayer__ver._2._31_
         }
     }
 }
-

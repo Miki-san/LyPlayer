@@ -51,6 +51,7 @@
             this.Volume_Bar = new System.Windows.Forms.TrackBar();
             this.Time_track_timer = new System.Windows.Forms.Timer(this.components);
             this.Volume = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Album_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
@@ -111,10 +112,10 @@
             this.Time_box.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Time_box.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Time_box.Enabled = false;
-            this.Time_box.Location = new System.Drawing.Point(12, 375);
+            this.Time_box.Location = new System.Drawing.Point(88, 375);
             this.Time_box.Name = "Time_box";
             this.Time_box.ReadOnly = true;
-            this.Time_box.Size = new System.Drawing.Size(556, 13);
+            this.Time_box.Size = new System.Drawing.Size(480, 13);
             this.Time_box.TabIndex = 2;
             // 
             // Previous_button
@@ -264,10 +265,20 @@
             this.Volume.TabIndex = 15;
             this.Volume.Text = "Volume:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 375);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Time of track:";
+            // 
             // LyPlayer_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 407);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Volume);
             this.Controls.Add(this.Volume_Bar);
             this.Controls.Add(this.axWindowsMediaPlayer1);
@@ -324,6 +335,7 @@
         private System.Windows.Forms.TrackBar Volume_Bar;
         private System.Windows.Forms.Timer Time_track_timer;
         private System.Windows.Forms.Label Volume;
+        private System.Windows.Forms.Label label1;
     }
 }
 
