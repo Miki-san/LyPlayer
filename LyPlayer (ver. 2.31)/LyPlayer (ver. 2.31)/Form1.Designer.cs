@@ -34,7 +34,7 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Music_bar = new System.Windows.Forms.ProgressBar();
             this.Time_box = new System.Windows.Forms.TextBox();
             this.Previous_button = new System.Windows.Forms.Button();
@@ -52,6 +52,7 @@
             this.Time_track_timer = new System.Windows.Forms.Timer(this.components);
             this.Volume = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Album_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
@@ -62,7 +63,7 @@
             // 
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.оПрограммеToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(580, 24);
@@ -74,29 +75,30 @@
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.menuToolStripMenuItem.Text = "Menu";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.menuToolStripMenuItem.Text = "Меню";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.fileToolStripMenuItem.Text = "Файл";
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.openFileToolStripMenuItem.Text = "Open file";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.openFileToolStripMenuItem.Text = "Открыть файл";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // оПрограммеToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // Music_bar
             // 
@@ -122,6 +124,7 @@
             // 
             this.Previous_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Previous;
             this.Previous_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Previous_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Previous_button.Location = new System.Drawing.Point(12, 317);
             this.Previous_button.Name = "Previous_button";
             this.Previous_button.Size = new System.Drawing.Size(32, 32);
@@ -133,6 +136,7 @@
             // 
             this.Stop_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Stop;
             this.Stop_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Stop_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Stop_button.Location = new System.Drawing.Point(50, 317);
             this.Stop_button.Name = "Stop_button";
             this.Stop_button.Size = new System.Drawing.Size(32, 32);
@@ -144,6 +148,7 @@
             // 
             this.Next_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Next;
             this.Next_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Next_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Next_button.Location = new System.Drawing.Point(164, 317);
             this.Next_button.Name = "Next_button";
             this.Next_button.Size = new System.Drawing.Size(32, 32);
@@ -166,23 +171,24 @@
             this.NowPlaying_label.AutoSize = true;
             this.NowPlaying_label.Location = new System.Drawing.Point(9, 234);
             this.NowPlaying_label.Name = "NowPlaying_label";
-            this.NowPlaying_label.Size = new System.Drawing.Size(69, 13);
+            this.NowPlaying_label.Size = new System.Drawing.Size(83, 13);
             this.NowPlaying_label.TabIndex = 11;
-            this.NowPlaying_label.Text = "Now Playing:";
+            this.NowPlaying_label.Text = "Сейчас играет:";
             // 
             // NPBox
             // 
             this.NPBox.Enabled = false;
-            this.NPBox.Location = new System.Drawing.Point(84, 231);
+            this.NPBox.Location = new System.Drawing.Point(98, 231);
             this.NPBox.Name = "NPBox";
             this.NPBox.ReadOnly = true;
-            this.NPBox.Size = new System.Drawing.Size(250, 20);
+            this.NPBox.Size = new System.Drawing.Size(236, 20);
             this.NPBox.TabIndex = 12;
             // 
             // AddTrack_button
             // 
             this.AddTrack_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Upload;
             this.AddTrack_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.AddTrack_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.AddTrack_button.Location = new System.Drawing.Point(310, 27);
             this.AddTrack_button.Name = "AddTrack_button";
             this.AddTrack_button.Size = new System.Drawing.Size(32, 32);
@@ -205,6 +211,7 @@
             // 
             this.Pause_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Pause;
             this.Pause_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pause_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Pause_button.Location = new System.Drawing.Point(126, 317);
             this.Pause_button.Name = "Pause_button";
             this.Pause_button.Size = new System.Drawing.Size(32, 32);
@@ -217,6 +224,7 @@
             // 
             this.Play_button.BackgroundImage = global::LyPlayer__ver._2._31_.Properties.Resources.Play;
             this.Play_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Play_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Play_button.Location = new System.Drawing.Point(88, 317);
             this.Play_button.Name = "Play_button";
             this.Play_button.Size = new System.Drawing.Size(32, 32);
@@ -261,23 +269,33 @@
             this.Volume.AutoSize = true;
             this.Volume.Location = new System.Drawing.Point(207, 288);
             this.Volume.Name = "Volume";
-            this.Volume.Size = new System.Drawing.Size(45, 13);
+            this.Volume.Size = new System.Drawing.Size(65, 13);
             this.Volume.TabIndex = 15;
-            this.Volume.Text = "Volume:";
+            this.Volume.Text = "Громкость:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 375);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Time of track:";
+            this.label1.Text = "Время трека:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(224, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Добаить трек:";
             // 
             // LyPlayer_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 407);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Volume);
             this.Controls.Add(this.Volume_Bar);
@@ -318,7 +336,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ProgressBar Music_bar;
         private System.Windows.Forms.TextBox Time_box;
         private System.Windows.Forms.Button Previous_button;
@@ -336,6 +353,8 @@
         private System.Windows.Forms.Timer Time_track_timer;
         private System.Windows.Forms.Label Volume;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
     }
 }
 

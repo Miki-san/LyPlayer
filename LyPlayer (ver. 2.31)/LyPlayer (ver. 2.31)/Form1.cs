@@ -52,10 +52,7 @@ namespace LyPlayer__ver._2._31_
                     FirstAdd = false;
                 } 
             }
-            catch (Exception)
-            {
-                MessageBox.Show($"Choose file to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в новом окне;
-            }
+            catch (Exception){}
         }
 
         private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e) //Opens file dialog window if you click tool strip menu; Открывает диалоговое окно если вы открываете верхнее меню;
@@ -74,6 +71,7 @@ namespace LyPlayer__ver._2._31_
             NPBox.Text = Files[playingTrackIndex]; //Writes name of now playing file in text box; Выводит имя проигрываемого файла в текстовый блок;
             axWindowsMediaPlayer1.settings.volume = Volume_Bar.Value; //Set volume to 100% value; Устанавливаем громкость на 100%;
             axWindowsMediaPlayer1.URL = Paths[playingTrackIndex]; //Adds way of now playing file in player; Добавляет путь проигрываемого файла в плеер;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
         }
 
         private void Playlist_box_SelectedIndexChanged(object sender, EventArgs e) //Plays file if selected file index changed; Проигрывает файл если был изменен индекс выделенного файла;
@@ -90,12 +88,11 @@ namespace LyPlayer__ver._2._31_
             {
                 MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
             }
-
         }
 
         public void Playlist_move(int shift) //Moves on playlist; Движение по плэйлисту;
         {
-            Playlist_box.SetSelected((playingTrackIndex + shift) % playlist, true);
+            Playlist_box.SetSelected((playingTrackIndex + shift + playlist) % playlist, true);
         }
 
         private void Next_button_Click(object sender, EventArgs e) //Plays next file; Проигрывание следущего файла;
@@ -104,10 +101,7 @@ namespace LyPlayer__ver._2._31_
             {
                 Playlist_move(1); //Makes move down (right) in playlist; Делаем движение вниз (вправо) по плэйлисту;
             }
-            catch (DivideByZeroException)
-            {
-                MessageBox.Show($"Add track to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
-            }
+            catch (DivideByZeroException){}
         }
 
         private void Previous_button_Click(object sender, EventArgs e) //Plays previous file; Проигрывание предыдущего файла;
@@ -116,10 +110,7 @@ namespace LyPlayer__ver._2._31_
             {
                 Playlist_move(-1); //Makes move up (left) in playlist; Делает движение вверх (влево) по плэйлисту;
             }
-            catch (DivideByZeroException)
-            {
-                MessageBox.Show($"Add track to play it!", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
-            }
+            catch (DivideByZeroException) {}
         }
 
         private void Play_button_Click(object sender, EventArgs e) //Plays or continuous file; Проигрывает файл или продолжает его воспроизведение;
@@ -128,10 +119,7 @@ namespace LyPlayer__ver._2._31_
             {
                 axWindowsMediaPlayer1.Ctlcontrols.play(); //Says player to play or continuous file; Проигрывает или продолжает проигрывание файла;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
-            }
+            catch (Exception){}
         }
 
         private void Pause_button_Click(object sender, EventArgs e) //Pause file; Ставит файл на паузу;
@@ -140,10 +128,16 @@ namespace LyPlayer__ver._2._31_
             {
                 axWindowsMediaPlayer1.Ctlcontrols.pause(); //Says player to pause file; ставит файл на паузу;
             }
-            catch (Exception ex)
+            catch (Exception){}
+        }
+
+        private void Stop_button_Click(object sender, EventArgs e) //Stops file playing; Остановка проигрывания файла. Ставит значение курсор времени в начало трека;
+        {
+            try
             {
-                MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
+                axWindowsMediaPlayer1.Ctlcontrols.stop(); //Says player to stop file playing; Остановка проигрывания;
             }
+            catch (Exception){}
         }
 
         private void Volume_Bar_Scroll(object sender, EventArgs e)
@@ -183,23 +177,22 @@ namespace LyPlayer__ver._2._31_
             }
         }
 
-       private void Time_track_timer_Tick(object sender, EventArgs e) //Timer for current time value; Таймер для значения пройденного времени;
-       {
-           currentTime = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-           Music_bar.Value = currentTime;
-           Time_box.Text = (currentTime / 60).ToString() + ":" + (currentTime % 60).ToString() + " / " + (durationOfTrack / 60).ToString() + ":" + (durationOfTrack % 60).ToString(); //Writes time of track; Выводит время трека;
-       }
-
-        private void Stop_button_Click(object sender, EventArgs e) //Stops file playing; Остановка проигрывания файла. Ставит значение курсор времени в начало трека;
+        private void Time_track_timer_Tick(object sender, EventArgs e) //Timer for current time value; Таймер для значения пройденного времени;
         {
-            try
-            {
-                axWindowsMediaPlayer1.Ctlcontrols.stop(); //Says player to stop file playing; Остановка проигрывания;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "LyPlayer_Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Writes about error in another window; Пишет об ошибке в отдельное окно;
-            }
+            currentTime = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            Music_bar.Value = currentTime;
+            Time_box.Text = (currentTime / 60).ToString() + ":" + (currentTime % 60).ToString() + " / " + (durationOfTrack / 60).ToString() + ":" + (durationOfTrack % 60).ToString(); //Writes time of track; Выводит время трека;
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("LyPlayer." +
+                "\nVersion: 2.67\n" +
+                "\nСделано для свободного пользования.\n" +
+                "\nРазработчики:\n" +
+                "\n     Рыхлов Михаил\n" +
+                "\n     Исаев Александр\n" +
+                "\n     Посеканов Никита\n", "LyPlayer", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
     }
 }
