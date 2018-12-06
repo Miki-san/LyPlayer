@@ -1,0 +1,15 @@
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\bin\Release\LyPlayer (ver. 2.31).exe.config
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\bin\Release\LyPlayer (ver. 2.31).exe
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\bin\Release\LyPlayer (ver. 2.31).pdb
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\bin\Release\Interop.WMPLib.dll
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\bin\Release\AxInterop.WMPLib.dll
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\Interop.WMPLib.dll
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\AxInterop.WMPLib.dll
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csproj.ResolveComReference.cache
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer__ver._2._31_.Properties.Resources.resources
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csproj.GenerateResource.Cache
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csproj.CoreCompileInputs.cache
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).exe
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).pdb
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer (ver. 2.31).csprojAssemblyReference.cache
+C:\Users\mikha\Desktop\LyPlayer (ver. 2.31)\LyPlayer (ver. 2.31)\obj\Release\LyPlayer__ver._2._67_.LyPlayer_main.resources
